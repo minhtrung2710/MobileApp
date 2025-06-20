@@ -1,0 +1,76 @@
+<ScrollView
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF2FD"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Nút quay lại -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quay lại"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Tìm kiếm -->
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tìm kiếm sản phẩm..."
+            android:padding="12dp"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:background="@drawable/search_box_bg"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Danh mục -->
+        <TextView
+            android:text="Danh mục"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <Button style="@style/CategoryButton" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="iPhone" />
+            <Button style="@style/CategoryButton" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="Samsung" />
+            <Button style="@style/CategoryButton" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="VIVO" />
+            <Button style="@style/CategoryButton" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:text="Xiaomi" />
+        </LinearLayout>
+
+        <!-- Tiêu đề sản phẩm nổi bật -->
+        <TextView
+            android:text="Sản phẩm nổi bật"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- Danh sách sản phẩm -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>
