@@ -39,21 +39,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
+        <!-- Danh sách nút danh mục cuộn ngang -->
+        <!-- Danh sách nút danh mục cuộn ngang -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="16dp"
+            android:fillViewport="true"
+            android:scrollbars="none">
 
-            <Button style="@style/CategoryButton" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:text="iPhone" />
-            <Button style="@style/CategoryButton" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:text="Samsung" />
-            <Button style="@style/CategoryButton" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:text="VIVO" />
-            <Button style="@style/CategoryButton" android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:text="Xiaomi" />
-        </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:gravity="center_vertical">
+
+                <Button
+                    style="@style/CategoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IPHONE"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    style="@style/CategoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAMSUNG"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    style="@style/CategoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIVO"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    style="@style/CategoryButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XIAOMI"
+                    android:layout_marginEnd="8dp" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
 
         <!-- Tiêu đề sản phẩm nổi bật -->
         <TextView

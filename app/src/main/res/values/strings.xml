@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DoanDoMinhTrung_2120110322</string>
+    <string name="total_price_format">Tổng tiền: %1$dđ</string>
 </resources>

@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         products.add(new Product("iPhone 15", "Hàng mới 100%", R.drawable.iphone_16_pro_max, "Giá: 35.000.000đ"));
         products.add(new Product("Samsung S23", "Bảo hành 12 tháng", R.drawable.samsung_s24_ultra, "Giá: 22.000.000đ"));
         products.add(new Product("Xiaomi 13", "Hiệu năng mạnh mẽ", R.drawable.xiaomi_note_13_pro, "Giá: 12.000.000đ"));
+        products.add(new Product("VIVO V30e", "Điện thoại VIVO V30e", R.drawable.vivo_v30e, "Giá: 8.490.000đ"));
 
         ProductAdapter adapter = new ProductAdapter(this, products);
         recyclerView.setAdapter(adapter);

@@ -1,6 +1,7 @@
 package com.example.doandominhtrung_2120110322;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.tvName.setText(p.getName());
         holder.tvDesc.setText(p.getDescription());
         holder.tvPrice.setText(p.getPrice());
+
+        // Thêm sự kiện click
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            intent.putExtra("name", p.getName());
+            intent.putExtra("description", p.getDescription());
+            intent.putExtra("price", p.getPrice());
+            intent.putExtra("image", p.getImageResId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
