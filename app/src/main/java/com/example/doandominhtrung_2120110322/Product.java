@@ -1,20 +1,31 @@
 package com.example.doandominhtrung_2120110322;
+
 public class Product {
     private String name;
-    private String description;
-    private int imageResId;
+    private String detail;
+    private String imageUrl;
     private String price;
 
-    public Product(String name, String description, int imageResId, String price) {
+    public Product(String name, String detail, String imageUrl, String price) {
         this.name = name;
-        this.description = description;
-        this.imageResId = imageResId;
+        this.detail = detail;
+        this.imageUrl = imageUrl;
         this.price = price;
     }
 
-    // Getter
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public int getImageResId() { return imageResId; }
-    public String getPrice() { return price; }
+    public String getName() {
+        return name;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public String getPrice() {
+        return price;
+    }
 }

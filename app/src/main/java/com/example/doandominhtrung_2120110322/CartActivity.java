@@ -65,10 +65,14 @@ public class CartActivity extends AppCompatActivity {
             int price = Integer.parseInt(cartItem.getProduct().getPrice().replaceAll("\\D+", ""));
             total += price * cartItem.getQuantity();
         }
-        totalPriceTextView.setText(getString(R.string.total_price_format, total));
+        totalPriceTextView.setText("Tổng tiền: " + formatCurrency(total));
 
         // Vô hiệu hóa nút nếu giỏ hàng trống
         checkoutButton.setEnabled(!items.isEmpty());
+    }
+    private String formatCurrency(int price) {
+        java.text.NumberFormat formatter = java.text.NumberFormat.getInstance(new java.util.Locale("vi", "VN"));
+        return formatter.format(price) + "đ";
     }
 
     @Override

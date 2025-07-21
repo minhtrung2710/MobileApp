@@ -10,6 +10,8 @@ import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +51,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         CartItem item = cartList.get(position);
         Product product = item.getProduct();
 
-        holder.imgProduct.setImageResource(product.getImageResId());
+        // Load ảnh từ URL
+        Glide.with(context)
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.placeholder) // ảnh tạm khi chờ
+                .into(holder.imgProduct);
+
+
         holder.tvName.setText(product.getName());
         holder.tvPrice.setText(product.getPrice());
         holder.tvQuantity.setText("Số lượng: " + item.getQuantity());
@@ -60,14 +68,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             if (currentPosition != RecyclerView.NO_POSITION && currentPosition < cartList.size()) {
                 Product productToRemove = cartList.get(currentPosition).getProduct();
 
-                // Xoá trong CartManager
                 CartManager.getInstance().removeFromCart(productToRemove);
 
-                // Cập nhật lại cartList từ CartManager
                 cartList = new ArrayList<>(CartManager.getInstance().getCartItems());
-                notifyDataSetChanged();
 
-                // Cập nhật RecyclerView
                 notifyDataSetChanged();
 
                 if (onItemRemovedListener != null) {
@@ -75,9 +79,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 }
             }
         });
-
-
     }
+
 
     public interface OnItemRemovedListener {
         void onItemRemoved();

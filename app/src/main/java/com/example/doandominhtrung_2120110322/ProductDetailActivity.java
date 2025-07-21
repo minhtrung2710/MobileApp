@@ -2,6 +2,7 @@ package com.example.doandominhtrung_2120110322;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -54,17 +57,23 @@ public class ProductDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String description = intent.getStringExtra("description");
-        int imageRes = intent.getIntExtra("image", R.drawable.placeholder);
+        String imageUrl = intent.getStringExtra("image_url");
+        Log.d("DEBUG_IMAGE_URL", "Image URL nhận được: " + imageUrl);
         String price = intent.getStringExtra("price");
 
 
         // Set dữ liệu lên view
         productName.setText(name);
         productDescription.setText(description);
-        productImage.setImageResource(imageRes);
         productPrice.setText(price);
 
         tvQuantity.setText(String.valueOf(quantity));
+
+        // Load ảnh từ URL bằng Glide
+        Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.placeholder)
+                .into(productImage);
 
         // Xử lý tăng/giảm số lượng
         btnIncrease.setOnClickListener(v -> {
@@ -81,7 +90,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         btnAddToCart.setOnClickListener(v -> {
             // Tạo sản phẩm từ dữ liệu hiện tại
-            Product product = new Product(name, description, imageRes, price);
+            Product product = new Product(name, description, imageUrl, price);
 
             // Thêm vào giỏ hàng
             CartManager.getInstance().addToCart(product, quantity);

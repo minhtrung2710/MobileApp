@@ -2,6 +2,7 @@ package com.example.doandominhtrung_2120110322;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private Context context;
     private List<Product> productList;
+    private static final String BASE_URL = "http://10.0.2.2/android_api/upload/";
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
@@ -43,19 +48,26 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         Product p = productList.get(position);
-        holder.imgProduct.setImageResource(p.getImageResId());
+
         holder.tvName.setText(p.getName());
-        holder.tvDesc.setText(p.getDescription());
+        holder.tvDesc.setVisibility (View.GONE);
         holder.tvPrice.setText(p.getPrice());
 
-        // Thêm sự kiện click
+        // Load ảnh từ URL sử dụng Glide
+        Glide.with(context)
+                .load(p.getImageUrl())
+                .placeholder(R.drawable.placeholder)
+                .into(holder.imgProduct);
+
+        // Click để chuyển sang ProductDetailActivity
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, ProductDetailActivity.class);
             intent.putExtra("name", p.getName());
-            intent.putExtra("description", p.getDescription());
+            intent.putExtra("description", p.getDetail());
             intent.putExtra("price", p.getPrice());
-            intent.putExtra("image", p.getImageResId());
-            context.startActivity(intent);
+            intent.putExtra("image_url", p.getImageUrl());
+            Log.d("DEBUG_ADAPTER_IMAGE", "Sending image URL: " + p.getImageUrl());
+            holder.itemView.getContext().startActivity(intent);
         });
     }
 
