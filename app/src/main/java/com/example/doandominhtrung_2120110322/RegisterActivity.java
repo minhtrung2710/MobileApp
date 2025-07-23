@@ -2,6 +2,7 @@ package com.example.doandominhtrung_2120110322;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Mật khẩu không khớp", Toast.LENGTH_SHORT).show();
             return;
         }
+        Log.d("REGISTER_DEBUG", "Email: " + email + ", Pass: " + password);
 
         try {
             JSONObject user = new JSONObject();
@@ -73,15 +75,21 @@ public class RegisterActivity extends AppCompatActivity {
                     registerUrl,
                     user,
                     response -> {
+                        Log.d("REGISTER_RESPONSE", "Response: " + response.toString());
                         Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     },
                     error -> {
-                        error.printStackTrace();
+                        Log.e("REGISTER_ERROR", "Volley Error: " + error.toString());
+                        if (error.networkResponse != null && error.networkResponse.data != null) {
+                            String errorMsg = new String(error.networkResponse.data);
+                            Log.e("REGISTER_ERROR_DETAIL", errorMsg);
+                        }
                         Toast.makeText(this, "Lỗi đăng ký hoặc tài khoản đã tồn tại", Toast.LENGTH_LONG).show();
                     }
             );
+
 
             RequestQueue queue = Volley.newRequestQueue(this);
             queue.add(jsonRequest);

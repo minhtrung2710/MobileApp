@@ -67,18 +67,24 @@ public class MainActivity extends AppCompatActivity {
                     loginUrl,
                     user,
                     response -> {
-                        Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                        try {
+                            Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
 
-                        // LƯU TRẠNG THÁI ĐĂNG NHẬP
-                        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("isLoggedIn", true);
-                        editor.apply();
+                            // LƯU TRẠNG THÁI ĐĂNG NHẬP
+                            SharedPreferences prefs = getSharedPreferences("user_session", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putBoolean("isLoggedIn", true);
+                            editor.putString("username", email);
+                            editor.apply();
 
-                        // CHUYỂN QUA HOME
-                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish(); // Kết thúc màn hình login, không cho quay lại
+                            // CHUYỂN QUA HOME
+                            Intent intent = new Intent(MainActivity.this, MainContainerActivity.class);
+                            startActivity(intent);
+                            finish(); // Kết thúc màn hình login, không cho quay lại
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(this, "Lỗi phản hồi JSON", Toast.LENGTH_SHORT).show();
+                        }
                     },
                     error -> {
                         error.printStackTrace();

@@ -108,20 +108,21 @@
                     android:backgroundTint="#6200EE"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@drawable/ic_cart"
+                    android:text="MUA NGAY"
                     android:padding="8dp" />
 
                 <Space
                     android:layout_width="12dp"
                     android:layout_height="wrap_content" />
 
-                <Button
-                    android:id="@+id/buyButton"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="MUA NGAY"
-                    android:backgroundTint="#6200EE"
-                    android:textColor="#FFF"/>
+<!--                <Button-->
+<!--                    android:id="@+id/buyButton"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="MUA NGAY"-->
+<!--                    android:backgroundTint="#6200EE"-->
+<!--                    android:textColor="#FFF"/>-->
             </LinearLayout>
 
         </LinearLayout>

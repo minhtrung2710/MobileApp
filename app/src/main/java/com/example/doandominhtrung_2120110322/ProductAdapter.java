@@ -1,8 +1,6 @@
 package com.example.doandominhtrung_2120110322;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +17,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     private Context context;
     private List<Product> productList;
-    private static final String BASE_URL = "http://10.0.2.2/android_api/upload/";
+    private OnProductClickListener listener;
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public interface OnProductClickListener {
+        void onProductClick(Product product);
+    }
+
+    public ProductAdapter(Context context, List<Product> productList, OnProductClickListener listener) {
         this.context = context;
         this.productList = productList;
+        this.listener = listener;
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -50,24 +53,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Product p = productList.get(position);
 
         holder.tvName.setText(p.getName());
-        holder.tvDesc.setVisibility (View.GONE);
+        holder.tvDesc.setVisibility(View.GONE);
         holder.tvPrice.setText(p.getPrice());
 
-        // Load ảnh từ URL sử dụng Glide
         Glide.with(context)
                 .load(p.getImageUrl())
                 .placeholder(R.drawable.placeholder)
                 .into(holder.imgProduct);
 
-        // Click để chuyển sang ProductDetailActivity
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ProductDetailActivity.class);
-            intent.putExtra("name", p.getName());
-            intent.putExtra("description", p.getDetail());
-            intent.putExtra("price", p.getPrice());
-            intent.putExtra("image_url", p.getImageUrl());
-            Log.d("DEBUG_ADAPTER_IMAGE", "Sending image URL: " + p.getImageUrl());
-            holder.itemView.getContext().startActivity(intent);
+            if (listener != null) {
+                listener.onProductClick(p);
+            }
         });
     }
 
